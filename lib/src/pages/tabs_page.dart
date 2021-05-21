@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_news_app/src/pages/tab1_page.dart';
+import 'package:flutter_news_app/src/pages/tab2_page.dart';
 import 'package:provider/provider.dart';
 
 class TabPage extends StatelessWidget {
@@ -43,10 +45,7 @@ class _Pages extends StatelessWidget {
       onPageChanged: (int newCurrentPage) {
         navigationProvider.currentPage = newCurrentPage;
       },
-      children: [
-        Container(color: Colors.red),
-        Container(color: Colors.cyan),
-      ],
+      children: [Tab1Page(), Tab2Page()],
     );
   }
 }
