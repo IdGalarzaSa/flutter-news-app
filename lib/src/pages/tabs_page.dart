@@ -41,7 +41,7 @@ class _Pages extends StatelessWidget {
 
     return PageView(
       controller: navigationProvider.pageController,
-      physics: BouncingScrollPhysics(),
+      physics: NeverScrollableScrollPhysics(),
       onPageChanged: (int newCurrentPage) {
         navigationProvider.currentPage = newCurrentPage;
       },
