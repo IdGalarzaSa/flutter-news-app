@@ -1,16 +1,25 @@
-# flutter_news_app
+# Flutter News App
 
-A new Flutter project.
+This is a study project. In this project, I got information from a News API that gave me data that can be visualized in the app by categories
 
-## Getting Started
+### General news
 
-This project is a starting point for a Flutter application.
+![title](assets/md/md-image1.png)
 
-A few resources to get you started if this is your first Flutter project:
+### News by category
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![title](assets/md/md-image2.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## what did I learn?
+In this project, I learned:
+
+- Implement the Provide pattern
+- Keep widgets state when I change the screen to keep the last position of the scroll of a list
+- I Made HTTP requests and handle the responses to keep the information in memory to prevent unnecessary requests if I got the information previously
+
+This project improved my skills as a Flutter developer by implementing a layout with a BottomNavigationMenu linked PageView using a Provider to handle the current page selected and communicating with all widgets that depend on the current page.
+
+## Links
+
+- [Flutter Course](https://www.udemy.com/course/flutter-ios-android-fernando-herrera/)
+- [News API](https://newsapi.org/)
