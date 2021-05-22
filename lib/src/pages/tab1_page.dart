@@ -16,15 +16,7 @@ class _Tab1PageState extends State<Tab1Page>
     final headlines = Provider.of<NewsService>(context).headlines;
 
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-            child: headlines.length == 0
-                ? Center(
-                    child: CircularProgressIndicator(
-                        color: myAppTheme.accentColor),
-                  )
-                : NewsList(headlines)),
-      ),
+      body: SafeArea(child: NewsList(headlines)),
     );
   }
 

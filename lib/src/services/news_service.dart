@@ -12,7 +12,7 @@ class NewsService with ChangeNotifier {
   List<Article> headlines = [];
   List<CategoryModel> categoryList = [
     CategoryModel(FontAwesomeIcons.building, "business"),
-    CategoryModel(FontAwesomeIcons.tv, "entertaiment"),
+    CategoryModel(FontAwesomeIcons.tv, "entertainment"),
     CategoryModel(FontAwesomeIcons.addressCard, "general"),
     CategoryModel(FontAwesomeIcons.headSideVirus, "health"),
     CategoryModel(FontAwesomeIcons.vials, "science"),
@@ -27,6 +27,7 @@ class NewsService with ChangeNotifier {
     getTopHeadlines();
     categoryList
         .forEach((category) => categoryArticles[category.categoryName] = []);
+    getHeadlinesByCategory(this.currentCategory);
   }
 
   // _currentCategory
@@ -66,7 +67,7 @@ class NewsService with ChangeNotifier {
     final urlAsUri = Uri.parse(url);
     final resp = await http.get(urlAsUri);
 
-    print("-----> Request made");
+    print("-----> Request made2");
 
     final newsResponse = newsResponseFromJson(resp.body);
 

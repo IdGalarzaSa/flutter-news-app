@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/src/model/cateogory_model.dart';
 import 'package:flutter_news_app/src/services/news_service.dart';
 import 'package:flutter_news_app/src/theme/theme.dart';
+import 'package:flutter_news_app/src/widgets/news_list.dart';
 import 'package:provider/provider.dart';
 
 class Tab2Page extends StatefulWidget {
@@ -19,7 +20,8 @@ class _Tab2PageState extends State<Tab2Page>
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(child: _CategoryList()),
+            _CategoryList(),
+            Expanded(child: NewsList(newsService.selectedCategoryArticles))
           ],
         ),
       ),
@@ -36,6 +38,8 @@ class _CategoryList extends StatelessWidget {
     final categoryList = Provider.of<NewsService>(context).categoryList;
 
     return Container(
+      width: double.infinity,
+      height: 95,
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         itemCount: categoryList.length,

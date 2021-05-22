@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/src/model/news_models.dart';
-import 'package:flutter_news_app/src/services/news_service.dart';
 import 'package:flutter_news_app/src/theme/theme.dart';
-import 'package:provider/provider.dart';
 
 class NewsList extends StatelessWidget {
   List<Article> articleList;
@@ -11,16 +9,20 @@ class NewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final newsProvider = Provider.of<NewsService>(context);
-
-    return Scrollbar(
-      child: ListView.builder(
-        itemCount: articleList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _New(articleList[index], index);
-        },
-      ),
-    );
+    return articleList.length == 0
+        ? Center(
+            child: CircularProgressIndicator(
+              color: myAppTheme.accentColor,
+            ),
+          )
+        : Scrollbar(
+            child: ListView.builder(
+              itemCount: articleList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _New(articleList[index], index);
+              },
+            ),
+          );
   }
 }
 
