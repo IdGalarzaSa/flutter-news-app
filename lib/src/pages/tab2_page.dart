@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/src/model/cateogory_model.dart';
 import 'package:flutter_news_app/src/services/news_service.dart';
+import 'package:flutter_news_app/src/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class Tab2Page extends StatefulWidget {
@@ -60,7 +61,10 @@ class _CategoryButton extends StatelessWidget {
     final cname = category.categoryName;
 
     return GestureDetector(
-      onTap: () => print(cname),
+      onTap: () {
+        final newsProvider = Provider.of<NewsService>(context, listen: false);
+        newsProvider.currentCategory = category.categoryName;
+      },
       child: Container(
         margin: EdgeInsets.all(8),
         child: Column(
@@ -82,6 +86,8 @@ class _CircleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categorySelected =
+        Provider.of<NewsService>(context, listen: false).currentCategory;
     return Container(
       width: 50,
       height: 50,
@@ -91,7 +97,9 @@ class _CircleIcon extends StatelessWidget {
       ),
       child: Icon(
         category.icon,
-        color: Colors.black38,
+        color: categorySelected == category.categoryName
+            ? myAppTheme.accentColor
+            : Colors.black38,
       ),
     );
   }

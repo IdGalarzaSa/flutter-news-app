@@ -8,6 +8,7 @@ class NewsService with ChangeNotifier {
   final _BASE_URL = "https://newsapi.org/v2";
   final _API_KEY = "10a3113ed79d40f5a42aeba94dda1df5";
 
+  // Properties
   List<Article> headlines = [];
   List<CategoryModel> categoryList = [
     CategoryModel(FontAwesomeIcons.building, "business"),
@@ -18,11 +19,28 @@ class NewsService with ChangeNotifier {
     CategoryModel(FontAwesomeIcons.futbol, "sports"),
     CategoryModel(FontAwesomeIcons.memory, "technology"),
   ];
+  String _currentCategory = "business";
+  Map<String, List<Article>> categoryArticles = new Map();
 
+  // Constructor
   NewsService() {
     getTopHeadlines();
+    categoryList
+        .forEach((category) => categoryArticles[category.categoryName] = []);
   }
 
+  // _currentCategory
+  String get currentCategory => this._currentCategory;
+
+  set currentCategory(String newCategorySelected) {
+    this._currentCategory = newCategorySelected;
+    getHeadlinesByCategory(newCategorySelected);
+    notifyListeners();
+  }
+
+  get selectedCategoryArticles => this.categoryArticles[this.currentCategory];
+
+  // headlines
   getTopHeadlines() async {
     final url = "$_BASE_URL/top-headlines?apiKey=$_API_KEY&country=us";
     final urlAsUri = Uri.parse(url);
@@ -36,5 +54,24 @@ class NewsService with ChangeNotifier {
       this.headlines.addAll(newsResponse.articles!);
       notifyListeners();
     }
+  }
+
+  getHeadlinesByCategory(String newCategorySelected) async {
+    if ((categoryArticles[newCategorySelected]?.length ?? 0) > 0) {
+      return categoryArticles[newCategorySelected];
+    }
+
+    final url =
+        "$_BASE_URL/top-headlines?apiKey=$_API_KEY&country=us&category=$newCategorySelected";
+    final urlAsUri = Uri.parse(url);
+    final resp = await http.get(urlAsUri);
+
+    print("-----> Request made");
+
+    final newsResponse = newsResponseFromJson(resp.body);
+
+    categoryArticles[newCategorySelected]?.addAll(newsResponse.articles ?? []);
+
+    notifyListeners();
   }
 }
